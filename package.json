@@ -1,0 +1,28 @@
+{
+  "name": "node-quality-tp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mini-projet API REST To-Do List avec qualité logicielle et CI/CD",
+  "main": "src/app.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "node --watch src/app.js",
+    "start": "node src/app.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "test": "jest --runInBand",
+    "test:cov": "jest --coverage --runInBand"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jest": "^29.17.0",
+    "jest": "^30.5.2",
+    "prettier": "^3.9.10",
+    "supertest": "^7.3.1"
+  }
+}
