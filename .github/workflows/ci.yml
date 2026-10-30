@@ -79,8 +79,21 @@ jobs:
       - name: Run tests with coverage
         run: npm run test:cov
 
+      - name: Check SonarQube secrets
+        run: |
+          if [ -z "${SONAR_TOKEN}" ] || [ -z "${SONAR_HOST_URL}" ]; then
+            echo "Missing SONAR_TOKEN or SONAR_HOST_URL GitHub secrets."
+            echo "Add them in GitHub > Settings > Secrets and variables > Actions"
+            exit 1
+          fi
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
+        with:
+          args: -Dsonar.qualitygate.wait=true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
